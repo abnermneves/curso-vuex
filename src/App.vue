@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    {{ $store.state.user }}
+    <User />
+    <Curso />
+    <div v-for="(post, index) in $store.state.acao.acao" :key="index">
+      {{ post.title }}
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import User from './components/User.vue'
+import Curso from './components/Curso.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    User,
+    Curso
+  },
+  created () {
+    console.log(this.$store)
+    this.$store.dispatch('acao/puxarAcao')
   }
 }
 </script>
